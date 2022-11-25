@@ -1,0 +1,220 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Sprites/Player Ship/Base/Main Ship - Base - Full health.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Player Ship/Engines/Main Ship - Engines - Base Engine - Spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player Ship/Engines/Main Ship - Engines - Base Engine.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player Ship/Weapons/Main Ship - Weapons - Auto Cannon.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/Player Ship/Base/Main Ship - Base - Damaged.png" type="Texture" id=6]
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 2
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 2
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 31 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "active",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 24.0
+} ]
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 288, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 2
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": false,
+"name": "firing",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 12 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=32]
+resource_name = "L_Shoot"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_primary_fire_L"
+}, {
+"args": [  ],
+"method": "_primary_fire_R"
+} ]
+}
+
+[node name="Player" type="Area2D"]
+scale = Vector2( 1.5, 1.5 )
+collision_mask = 4
+input_pickable = false
+monitoring = false
+script = ExtResource( 5 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -9, -4.76837e-07 )
+rotation = 1.5708
+scale = Vector2( 2.89583, 0.926136 )
+polygon = PoolVector2Array( -1.67418e-07, -23.7546, -5.17986, -4.31902, -5.17986, 2.15951, -1.03597, 4.31902, 1.03597, 4.31902, 5.17986, 2.15951, 5.17986, -4.31902, -1.67418e-07, -23.7546 )
+
+[node name="Body" type="AnimatedSprite" parent="."]
+rotation = 1.5708
+frames = SubResource( 10 )
+frame = 1
+
+[node name="Thrusters" type="AnimatedSprite" parent="Body"]
+visible = false
+show_behind_parent = true
+scale = Vector2( 1, 1.2 )
+frames = SubResource( 8 )
+animation = "active"
+frame = 1
+speed_scale = 2.0
+playing = true
+
+[node name="AutoCannon" type="AnimatedSprite" parent="Body"]
+show_behind_parent = true
+frames = SubResource( 13 )
+animation = "firing"
+frame = 6
+playing = true
+
+[node name="Left_Barrel" type="Position2D" parent="Body/AutoCannon"]
+position = Vector2( -9, -6 )
+
+[node name="Timer" type="Timer" parent="Body/AutoCannon/Left_Barrel"]
+wait_time = 0.1
+
+[node name="Right_Barrel" type="Position2D" parent="Body/AutoCannon"]
+position = Vector2( 9, -6 )
+
+[node name="Timer" type="Timer" parent="Body/AutoCannon/Right_Barrel"]
+wait_time = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/AutoCannon"]
+method_call_mode = 1
+anims/L_Shoot = SubResource( 32 )
+
+[node name="Engine" type="Sprite" parent="Body"]
+show_behind_parent = true
+texture = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+
+[connection signal="timeout" from="Body/AutoCannon/Left_Barrel/Timer" to="." method="_L_cooldown"]
+[connection signal="timeout" from="Body/AutoCannon/Right_Barrel/Timer" to="." method="_R_cooldown"]
